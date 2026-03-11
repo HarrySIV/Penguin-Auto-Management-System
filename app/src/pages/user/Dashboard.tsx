@@ -2,11 +2,13 @@ import { DashboardCard } from '../../components/ui/DashboardCard';
 
 export const Dashboard = () => {
   return (
-    <div>
-      <h1>dashboard</h1>
-      <DashboardCard title="Profile" path="/profile" />
-      <DashboardCard title="Invoices" path="/invoices" />
-      <DashboardCard title="Vehicles" path="/vehicles" />
-    </div>
+    <>
+      <h1 className="bg-slate-400">Dashboard</h1>
+      <br />
+      <div className="flex flex-wrap justify-start">
+        <DashboardCard title="Profile" path="/profile" />
+        <DashboardCard title="Invoices" path="/invoices" />
+      </div>
+    </>
   );
 };

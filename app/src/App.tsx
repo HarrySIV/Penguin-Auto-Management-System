@@ -43,7 +43,7 @@ export function App() {
 
   return (
     <AccountContext.Provider value={{ accountInfo, setAccountInfo }}>
-      <div className={`bg-${themeColors.light} min-w-screen min-h-screen`}>
+      <div className={`bg-slate-100 min-w-screen min-h-screen`}>
         <BrowserRouter>
           <Header />
           <PageRoutes />
