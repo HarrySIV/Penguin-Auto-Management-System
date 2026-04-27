@@ -1,25 +1,22 @@
 import ReactDOM from 'react-dom';
 
-import './_modal.scss';
-import { Button } from './Button';
-
 interface IModalProps {
-  closeHandler: () => void;
   header: string;
   footer?: string | React.ReactElement;
   children?: React.ReactNode;
+  className?: string;
 }
 
 export const Modal = (props: IModalProps) => {
   const content = (
-    <div className="modal-backdrop">
-      <div className="modal">
-        <header className={`modal__header`}>
-          <Button onClick={props.closeHandler} text="x" />
-          <h2 className="modal__title">{props.header}</h2>
-        </header>
+    <div
+      className={
+        'fixed top-0 left-0 w-screen h-screen bg-black/90 z-10' +
+        props.className
+      }
+    >
+      <div className="absolute top-[10vh] left-[10%] w-[80%] bg-slate-400 shadow-black rounded2xl h-max-[89vh] overflow-y-auto z-20">
         <main>{props.children}</main>
-        <footer className="modal__footer">{props.footer}</footer>
       </div>
     </div>
   );

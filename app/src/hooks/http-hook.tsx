@@ -10,7 +10,7 @@ export const useHttpClient = () => {
       url: string,
       method: string = 'GET',
       body: any = null,
-      headers: any = {},
+      headers: any = { 'Content-type': 'application/json' },
     ) => {
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();

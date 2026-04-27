@@ -13,25 +13,15 @@ import { Invoices } from './repair/Invoices';
 import { Invoice } from './repair/Invoice';
 
 export const PageRoutes = () => {
-  const accountInfo = useContext(AccountContext);
   const routes = (
     <Routes>
-      {false && (
-        <>
-          <Route path="/login" element={<Login />} />
-          <Route path="/createaccount" element={<CreateAccount />} />
-          <Route path="/" element={<Navigate to="/login" replace />} />
-        </>
-      )}
-      {true && (
-        <>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/invoices" element={<Invoices />} />
-          <Route path="/invoice/:id" element={<Invoice />} />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        </>
-      )}
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/invoices" element={<Invoices />} />
+      <Route path="/invoice/:id" element={<Invoice />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/createaccount" element={<CreateAccount />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/error" element={<Error />} />
       <Route path="*" element={<Navigate to="/error" replace />} />

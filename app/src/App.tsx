@@ -9,7 +9,7 @@ import { themeColors } from './theme-colors';
 import { Header } from './components/header/Header';
 import { PageRoutes } from './pages/PageRoutes';
 
-import { serverURL } from './utility/environment';
+import { serverURL, testServerURL } from './utility/environment';
 
 export function App() {
   const { sendRequest } = useHttpClient();
@@ -17,16 +17,20 @@ export function App() {
 
   useEffect(() => {
     const fetchData = async (token: string) => {
-      const response = await sendRequest(`${serverURL}/account/login`, 'POST', {
-        token: token,
-      });
-      const data = response.data;
+      const response = await sendRequest(
+        `${testServerURL}/account/login`,
+        'POST',
+        JSON.stringify({
+          token: token,
+        }),
+      );
+      const data = response.account;
       const newToken = data.token;
       const accountData = {
         firstName: data.firstName as string,
         lastName: data.lastName as string,
         email: data.email as string,
-        token: data.token as string,
+        token: response.token as string,
       };
       setAccountInfo(accountData);
       storeToken(newToken);
@@ -39,7 +43,7 @@ export function App() {
         console.log(err);
       }
     }
-  }, [sendRequest]);
+  }, [sendRequest, accountInfo]);
 
   return (
     <AccountContext.Provider value={{ accountInfo, setAccountInfo }}>

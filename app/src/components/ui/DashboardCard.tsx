@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
 import { Card } from './Card';
+import { LinkItem } from '../header/navigation/LinkItem';
 
 type TDashboardCardProps = {
   title: string;
@@ -8,11 +8,11 @@ type TDashboardCardProps = {
 
 export const DashboardCard = (props: TDashboardCardProps) => {
   return (
-    <NavLink to={props.path}>
+    <LinkItem to={props.path}>
       <Card
         title={props.title}
         className={`m-10 bg-slate-400 min-w-24 min-h-32 max-w-56 max-h-48`}
       />
-    </NavLink>
+    </LinkItem>
   );
 };
