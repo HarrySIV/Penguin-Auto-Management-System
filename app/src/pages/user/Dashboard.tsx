@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AccountContext } from '../../context/account-context';
@@ -23,6 +23,12 @@ export const Dashboard = () => {
     storeToken('');
     navigate('/login');
   };
+
+  useEffect(() => {
+    if (!accountInfo?.accountInfo?.token) {
+      navigate('/login');
+    }
+  }, [accountInfo?.accountInfo?.token, navigate]);
   return (
     <>
       {isLoggingOut ? (

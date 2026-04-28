@@ -11,16 +11,25 @@ export const Profile = () => {
   const cancelVehicleHandler = () => {
     setIsAddingVehicle(false);
   };
+  const createVehicleHandler = () => {
+    setIsAddingVehicle(false);
+  };
   const cancelEditHandler = () => {
     setIsEditingProfile(false);
   };
   return (
     <div className="p-4">
       {isAddingVehicle ? (
-        <CreateVehicle cancelHandler={cancelVehicleHandler} />
+        <CreateVehicle
+          cancelHandler={cancelVehicleHandler}
+          createHandler={createVehicleHandler}
+        />
       ) : null}
       {isEditingProfile ? (
-        <CreateVehicle cancelHandler={cancelEditHandler} />
+        <CreateVehicle
+          cancelHandler={cancelEditHandler}
+          createHandler={createVehicleHandler}
+        />
       ) : null}
       <h1>Profile</h1>
       <div className="flex flex-col m-4 p-4">
@@ -40,11 +49,6 @@ export const Profile = () => {
         ) : null}
       </div>
       <div>
-        <Button
-          text="Edit Info"
-          onClick={() => setIsEditingProfile(true)}
-          className="bg-slate-400 rounded-2xl"
-        />
         <Button
           text="Add Vehicle"
           onClick={() => setIsAddingVehicle(true)}

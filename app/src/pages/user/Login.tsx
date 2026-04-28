@@ -24,10 +24,10 @@ export function Login() {
       storeToken(response.token);
       accountInfo?.setAccountInfo({
         firstName: data.firstName,
-        lastName: data.lasttName,
+        lastName: data.lastName,
         email: data.email,
-        token: data.token,
-        vehicles: data.vehicles,
+        token: response.token || '',
+        vehicles: response.vehicles || [],
       });
       navigate('/dashboard');
     } catch (err) {

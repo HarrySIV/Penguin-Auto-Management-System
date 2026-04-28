@@ -1,5 +1,4 @@
 import { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useHttpClient } from '../hooks/http-hook';
 import { AccountContext } from '../context/account-context';
 import { testServerURL } from '../utility/environment';
@@ -8,6 +7,7 @@ import { Button } from '../components/ui/Button';
 
 type TCreateVehicleProps = {
   cancelHandler: () => void;
+  createHandler: () => void;
 };
 
 export function CreateVehicle(props: TCreateVehicleProps) {
@@ -29,6 +29,19 @@ export function CreateVehicle(props: TCreateVehicleProps) {
         'POST',
         JSON.stringify(formData),
       );
+      //@ts-expect-error account info will always be defined here
+      accountInfo?.setAccountInfo({
+        ...accountInfo.accountInfo,
+        vehicles: [
+          ...accountInfo.accountInfo?.vehicles,
+          {
+            make: formData.make,
+            model: formData.model,
+            year: formData.year,
+          },
+        ],
+      });
+      props.createHandler();
     } catch (error) {
       console.log(error);
     }

@@ -27,11 +27,11 @@ export function App() {
       const data = response.account;
       const newToken = data.token;
       const accountData = {
-        firstName: data.firstName as string,
-        lastName: data.lastName as string,
-        email: data.email as string,
-        token: response.token as string,
-        vehicles: data.vehicles,
+        firstName: data.firstName || '',
+        lastName: data.lastName || '',
+        email: data.email || '',
+        token: response.token || '',
+        vehicles: response.vehicles || [],
       };
       setAccountInfo(accountData);
       storeToken(newToken);
