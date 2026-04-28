@@ -1,8 +1,6 @@
 import ReactDOM from 'react-dom';
 
 interface IModalProps {
-  header: string;
-  footer?: string | React.ReactElement;
   children?: React.ReactNode;
   className?: string;
 }

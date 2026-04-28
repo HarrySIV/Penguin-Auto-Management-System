@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { hashPassword, comparePassword } from '../middleware/hashing';
 import { HttpError } from '../utility/http-error';
 import Account, { TAccount } from '../models/Account';
+import Vehicle from '../models/Vehicle';
 
 export const createAccount: RequestHandler = async (req, res, next) => {
   if (!req.body) {
@@ -98,7 +99,14 @@ export const getAccount: RequestHandler = async (req, res, next) => {
     const err = new HttpError('no password or token was provided', 500);
     return next(err);
   }
-  res.json({ account: account, token: newToken });
+  let vehicles = null;
+  try {
+    vehicles = await Vehicle.find({ email: email });
+  } catch (error) {
+    const err = new HttpError('could not get vehicles', 500);
+    return next(err);
+  }
+  res.json({ account: account, vehicles: vehicles, token: newToken });
 };
 
 export const updateAccount: RequestHandler = async (req, res, next) => {

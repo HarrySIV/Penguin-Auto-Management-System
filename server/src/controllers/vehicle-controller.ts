@@ -37,7 +37,7 @@ export const getVehicles: RequestHandler = async (req, res, next) => {
     return next(err);
   }
   const { email } = req.body;
-  let vehicles: TVehicle[] = [];
+  let vehicles = null;
 
   try {
     vehicles = await Vehicle.find({ email: email });

@@ -26,7 +26,7 @@ export const Dashboard = () => {
   return (
     <>
       {isLoggingOut ? (
-        <Modal header="log out?">
+        <Modal>
           <h3>Are you sure you want to logout?</h3>
           <Button
             text="logout"

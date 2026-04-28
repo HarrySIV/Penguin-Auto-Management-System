@@ -31,6 +31,7 @@ export function App() {
         lastName: data.lastName as string,
         email: data.email as string,
         token: response.token as string,
+        vehicles: data.vehicles,
       };
       setAccountInfo(accountData);
       storeToken(newToken);
@@ -43,7 +44,7 @@ export function App() {
         console.log(err);
       }
     }
-  }, [sendRequest, accountInfo]);
+  }, [sendRequest]);
 
   return (
     <AccountContext.Provider value={{ accountInfo, setAccountInfo }}>

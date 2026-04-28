@@ -4,6 +4,7 @@ export type TAccountInfo = {
   firstName: string | null;
   lastName: string | null;
   email: string | null;
+  vehicles: string[];
   token: string | null;
 };
 export type TAccountContext = {

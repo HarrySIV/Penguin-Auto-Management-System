@@ -27,6 +27,7 @@ export function Login() {
         lastName: data.lasttName,
         email: data.email,
         token: data.token,
+        vehicles: data.vehicles,
       });
       navigate('/dashboard');
     } catch (err) {
