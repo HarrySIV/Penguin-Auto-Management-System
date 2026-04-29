@@ -7,7 +7,6 @@ import { Contact } from './Contact';
 import { Error } from './Error';
 import { Profile } from './user/Profile';
 import { Invoices } from './repair/Invoices';
-import { Invoice } from './repair/Invoice';
 import { CreateInvoice } from './CreateInvoice';
 
 export const PageRoutes = () => {
@@ -16,7 +15,6 @@ export const PageRoutes = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/invoices" element={<Invoices />} />
-      <Route path="/invoice" element={<Invoice />} />
       <Route path="/login" element={<Login />} />
       <Route path="/admin-login" element={<Login />} />
       <Route path="/create-account" element={<CreateAccount />} />
