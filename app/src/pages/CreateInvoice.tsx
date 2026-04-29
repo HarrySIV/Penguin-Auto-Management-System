@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from 'react';
 import { useHttpClient } from '../hooks/http-hook';
-import { testServerURL } from '../utility/environment';
+import { testServerURL, serverURL } from '../utility/environment';
 import { Button } from '../components/ui/Button';
 
 export function CreateInvoice() {
@@ -35,7 +35,7 @@ export function CreateInvoice() {
     });
     try {
       const response = await sendRequest(
-        `${testServerURL}/invoices/create-invoice`,
+        `${serverURL}/invoices/create-invoice`,
         'POST',
         JSON.stringify(formData),
       );

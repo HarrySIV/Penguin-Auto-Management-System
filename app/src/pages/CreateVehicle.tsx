@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useHttpClient } from '../hooks/http-hook';
 import { AccountContext } from '../context/account-context';
-import { testServerURL } from '../utility/environment';
+import { testServerURL, serverURL } from '../utility/environment';
 import { Modal } from '../components/ui/Modal';
 import { Button } from '../components/ui/Button';
 
@@ -25,7 +25,7 @@ export function CreateVehicle(props: TCreateVehicleProps) {
     e.preventDefault();
     try {
       const response = await sendRequest(
-        `${testServerURL}/vehicles/create-vehicle`,
+        `${serverURL}/vehicles/create-vehicle`,
         'POST',
         JSON.stringify(formData),
       );

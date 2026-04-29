@@ -16,7 +16,7 @@ export function Login() {
     e.preventDefault();
     try {
       const response = await sendRequest(
-        `${testServerURL}/account/login`,
+        `${serverURL}/account/login`,
         'POST',
         JSON.stringify(loginData),
       );

@@ -17,7 +17,7 @@ export function App() {
   useEffect(() => {
     const fetchData = async (token: string) => {
       const response = await sendRequest(
-        `${testServerURL}/account/login`,
+        `${serverURL}/account/login`,
         'POST',
         JSON.stringify({
           token: token,
