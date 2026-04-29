@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent } from 'react';
 import { useHttpClient } from '../hooks/http-hook';
 import { testServerURL } from '../utility/environment';
 import { Button } from '../components/ui/Button';
 
 export function CreateInvoice() {
   const { sendRequest } = useHttpClient();
-  const [repairInputs, setRepairInputs] = useState({ '': 0 });
+  const [repairInputs, setRepairInputs] = useState([{ repair: '', amount: 0 }]);
   const [formData, setFormData] = useState({
-    repairs: [] as Array<[string, number]>,
+    repairs: [] as { repair: string; amount: number }[],
     id: null as number | null,
     total: 0,
     date: null as Date | null,
@@ -21,11 +21,17 @@ export function CreateInvoice() {
 
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
+    let total = 0;
+    for (const { amount } of repairInputs) {
+      total += amount;
+    }
+    console.log(repairInputs);
     setFormData({
       ...formData,
+      total: total,
       date: new Date(Date.now()),
       id: Math.random(),
-      repairs: Object.entries(repairInputs),
+      repairs: repairInputs,
     });
     try {
       const response = await sendRequest(
@@ -33,9 +39,38 @@ export function CreateInvoice() {
         'POST',
         JSON.stringify(formData),
       );
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleChange = (
+    index: number,
+    event: ChangeEvent<HTMLInputElement, HTMLInputElement>,
+    key: string,
+  ) => {
+    const values = [...repairInputs];
+    if (!isNaN(parseInt(event.target.value))) {
+      //@ts-expect-error the object key has to be a string so idk about this one
+      values[index][key] = parseInt(event.target.value);
+    } else {
+      //@ts-expect-error same as above
+      values[index][key] = event.target.value;
+    }
+
+    setRepairInputs(values);
+  };
+
+  const handleAddRepair = () => {
+    setRepairInputs([...repairInputs, { repair: '', amount: 0 }]);
+  };
+
+  const handleRemoveRepair = (index: number) => {
+    const newInputs = repairInputs.filter((repair, mapIndex) => {
+      if (index !== mapIndex) return repair;
+    });
+    setRepairInputs(newInputs);
   };
 
   return (
@@ -43,7 +78,7 @@ export function CreateInvoice() {
       <h2 className="m-4 p-4">Add Vehicle</h2>
       <form className="m-4 p-4">
         <input
-          className="border-black border-2"
+          className="border-black border-2 m-2"
           type="text"
           placeholder="customer email"
           required
@@ -54,8 +89,9 @@ export function CreateInvoice() {
             })
           }
         />
+        <br />
         <input
-          className="border-black border-2"
+          className="border-black border-2 m-2"
           type="text"
           placeholder="Make"
           required
@@ -66,9 +102,9 @@ export function CreateInvoice() {
             })
           }
         />
-        &nbsp;
+        <br />
         <input
-          className="border-black border-2"
+          className="border-black border-2 m-2"
           type="text"
           placeholder="Model"
           required
@@ -79,10 +115,9 @@ export function CreateInvoice() {
             })
           }
         />
-        <br></br>
-        <br></br>
+        <br />
         <input
-          className="border-black border-2"
+          className="border-black border-2 m-2"
           type="text"
           placeholder="Year"
           required
@@ -93,41 +128,35 @@ export function CreateInvoice() {
             })
           }
         />
-        <br></br>
-        <br></br>
-        {Object.keys(repairInputs).map((key) => {
-          return (
-            <div key={key}>
-              <input
-                className="border-black border-2"
-                type="text"
-                placeholder="repair"
-                required
-                onChange={(e) =>
-                  setRepairInputs({
-                    ...repairInputs,
-                    //@ts-expect-error typing is off
-                    [e.target.value]: repairInputs.key,
-                  })
-                }
-              />
-              <input
-                className="border-black border-2"
-                type="text"
-                placeholder="amount"
-                required
-                onChange={(e) =>
-                  setRepairInputs({
-                    ...repairInputs,
-                    [key]: parseInt(e.target.value),
-                  })
-                }
-              />
-              <br></br>
-              <br></br>
-            </div>
-          );
-        })}
+        <br />
+        <div className="p-8 m-8">
+          {repairInputs.map((repair, index) => {
+            return (
+              <div key={index}>
+                <input
+                  className="border-black border-2 m-2"
+                  type="text"
+                  placeholder="repair"
+                  required
+                  onChange={(event) => handleChange(index, event, 'repair')}
+                />
+                <input
+                  className="border-black border-2 m-2"
+                  type="text"
+                  placeholder="amount"
+                  required
+                  onChange={(event) => handleChange(index, event, 'amount')}
+                />
+                <Button
+                  text="delete"
+                  onClick={() => handleRemoveRepair(index)}
+                />
+                <br></br>
+              </div>
+            );
+          })}
+        </div>
+        <Button text="Add repair" onClick={handleAddRepair} />
         <Button text="submit" onClick={handleSubmit} />
       </form>
     </>

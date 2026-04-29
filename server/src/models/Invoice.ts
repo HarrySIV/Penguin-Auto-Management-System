@@ -11,7 +11,12 @@ export type TInvoice = {
 };
 
 const invoiceSchema = new Schema({
-  repairs: [{ type: String }, { type: Number }],
+  repairs: [
+    {
+      repair: { type: String },
+      amount: { type: Number },
+    },
+  ],
   id: { type: Number },
   total: { type: Number },
   date: { type: Date },

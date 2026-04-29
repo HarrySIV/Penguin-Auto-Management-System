@@ -49,3 +49,14 @@ export const getInvoices: RequestHandler = async (req, res, next) => {
 
   res.status(200).json({ invoices: invoices, email: email });
 };
+
+export const getAllInvoices: RequestHandler = async (req, res, next) => {
+  let invoices = null;
+  try {
+    invoices = await Invoice.find();
+  } catch (error) {
+    const err = new HttpError('could not find invoices', 500);
+  }
+
+  res.status(200).json({ invoices: invoices });
+};

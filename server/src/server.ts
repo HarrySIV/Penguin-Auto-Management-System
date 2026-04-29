@@ -29,7 +29,7 @@ server.use((req, res, next) => {
 server.use('/api/account', accountRoutes);
 server.use('/api/admin', adminRoutes);
 server.use('/api/vehicles', vehicleRoutes);
-server.use('/api/invoice', invoiceRoutes);
+server.use('/api/invoices', invoiceRoutes);
 
 server.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);
