@@ -9,9 +9,16 @@ export const createInvoice: RequestHandler = async (req, res, next) => {
     const err = new HttpError('there was no req.body', 500);
     return next(err);
   }
-  const {} = req.body;
+  const { email, total, repairs, vehicle, date, id } = req.body;
 
-  const createdInvoice = new Invoice({});
+  const createdInvoice = new Invoice({
+    email,
+    id,
+    total,
+    repairs,
+    vehicle,
+    date,
+  });
   try {
     const currentSession = await mongoose.startSession();
     await createdInvoice.save();
@@ -23,7 +30,7 @@ export const createInvoice: RequestHandler = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ account: createdInvoice, message: 'invoices created!' });
+    .json({ invoice: createdInvoice, message: 'invoice created!' });
 };
 
 export const getInvoices: RequestHandler = async (req, res, next) => {
@@ -32,7 +39,7 @@ export const getInvoices: RequestHandler = async (req, res, next) => {
     return next(err);
   }
   const { email } = req.body;
-  let invoices: TInvoice[] = [];
+  let invoices = null;
 
   try {
     invoices = await Invoice.find({ email: email });

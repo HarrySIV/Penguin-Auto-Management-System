@@ -28,6 +28,7 @@ export function Login() {
         email: data.email,
         token: response.token || '',
         vehicles: response.vehicles || [],
+        invoices: response.invoices || [],
       });
       navigate('/dashboard');
     } catch (err) {
@@ -71,7 +72,7 @@ export function Login() {
             onClick={handleLogin}
           />
           <br />
-          <a href="/CreateAccount" className="text-blue-800">
+          <a href="/create-account" className="text-blue-800">
             Create an Account
           </a>
         </form>

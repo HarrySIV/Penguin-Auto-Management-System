@@ -24,7 +24,7 @@ export function CreateAccount() {
     e.preventDefault();
     try {
       const response = await sendRequest(
-        `${testServerURL}/account/create-account`,
+        `${testServerURL}/admin/create-account`,
         'POST',
         JSON.stringify(formData),
       );

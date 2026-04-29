@@ -28,7 +28,7 @@ export const createVehicle: RequestHandler = async (req, res, next) => {
 
   res
     .status(201)
-    .json({ account: createdVehicle, message: 'vehicle created!' });
+    .json({ vehicle: createdVehicle, message: 'vehicle created!' });
 };
 
 export const getVehicles: RequestHandler = async (req, res, next) => {

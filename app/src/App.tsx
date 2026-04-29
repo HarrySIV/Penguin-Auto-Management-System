@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { AccountContext, type TAccountInfo } from './context/account-context';
 import { retrieveToken, storeToken } from './utility/account-token';
 import { useHttpClient } from './hooks/http-hook';
-import { themeColors } from './theme-colors';
 
 import { Header } from './components/header/Header';
 import { PageRoutes } from './pages/PageRoutes';
@@ -32,6 +31,7 @@ export function App() {
         email: data.email || '',
         token: response.token || '',
         vehicles: response.vehicles || [],
+        invoices: response.invoices || [],
       };
       setAccountInfo(accountData);
       storeToken(newToken);

@@ -7,7 +7,4 @@ const router = Router();
 router.post('/create-invoice', createInvoice);
 router.get('/', getInvoices);
 
-// router.put();
-// router.delete();
-
 module.exports = router;

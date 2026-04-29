@@ -5,8 +5,6 @@ import jwt from 'jsonwebtoken';
 import { hashPassword, comparePassword } from '../middleware/hashing';
 import { HttpError } from '../utility/http-error';
 import Account, { TAccount } from '../models/Account';
-import Vehicle from '../models/Vehicle';
-import Invoice from '../models/Invoice';
 
 export const createAccount: RequestHandler = async (req, res, next) => {
   if (!req.body) {
@@ -46,7 +44,7 @@ export const getAccount: RequestHandler = async (req, res, next) => {
     try {
       tokenData = jwt.verify(
         data.token,
-        process.env.CUSTOMER_SECRET_KEY!,
+        process.env.ADMIN_SECRET_KEY!,
       ) as jwt.JwtPayload;
     } catch (error) {
       const err = new HttpError('could not verify token', 500);
@@ -79,13 +77,9 @@ export const getAccount: RequestHandler = async (req, res, next) => {
     const isPass = await comparePassword(data.password, account.hashPass);
     if (isPass) {
       try {
-        newToken = jwt.sign(
-          { email: email },
-          process.env.CUSTOMER_SECRET_KEY!,
-          {
-            expiresIn: '30d',
-          },
-        );
+        newToken = jwt.sign({ email: email }, process.env.ADMIN_SECRET_KEY!, {
+          expiresIn: '30d',
+        });
       } catch (error) {
         const err = new HttpError('password did not match', 500);
         return next(err);
@@ -93,7 +87,7 @@ export const getAccount: RequestHandler = async (req, res, next) => {
     }
   } else if (tokenData) {
     try {
-      newToken = jwt.sign({ email: email }, process.env.CUSTOMER_SECRET_KEY!, {
+      newToken = jwt.sign({ email: email }, process.env.ADMIN_SECRET_KEY!, {
         expiresIn: '30d',
       });
     } catch (error) {
@@ -104,24 +98,8 @@ export const getAccount: RequestHandler = async (req, res, next) => {
     const err = new HttpError('no password or token was provided', 500);
     return next(err);
   }
-  let vehicles = null;
-  try {
-    vehicles = await Vehicle.find({ email: email });
-  } catch (error) {
-    const err = new HttpError('could not get vehicles', 500);
-    return next(err);
-  }
-  let invoices = null;
-  try {
-    invoices = await Invoice.find({ email: email });
-  } catch (error) {
-    const err = new HttpError('could not get invoices', 500);
-    return next(err);
-  }
   res.json({
     account: account,
-    vehicles: vehicles,
-    invoices: invoices,
     token: newToken,
   });
 };
@@ -136,7 +114,7 @@ export const updateAccount: RequestHandler = async (req, res, next) => {
   try {
     tokenData = jwt.verify(
       data.token,
-      process.env.CUSTOMER_SECRET_KEY!,
+      process.env.ADMIN_SECRET_KEY!,
     ) as jwt.JwtPayload;
   } catch (error) {
     const err = new HttpError('could not verify token', 500);
@@ -157,13 +135,9 @@ export const updateAccount: RequestHandler = async (req, res, next) => {
         password: newHashPasss,
       },
     );
-    newToken = jwt.sign(
-      { email: data.email },
-      process.env.CUSTOMER_SECRET_KEY!,
-      {
-        expiresIn: '30d',
-      },
-    );
+    newToken = jwt.sign({ email: data.email }, process.env.ADMIN_SECRET_KEY!, {
+      expiresIn: '30d',
+    });
   } catch (error) {
     const err = new HttpError('account did not update', 500);
     return next(err);
@@ -187,7 +161,7 @@ export const deleteAccount: RequestHandler = async (req, res, next) => {
   try {
     tokenData = jwt.verify(
       data.token,
-      process.env.CUSTOMER_SECRET_KEY!,
+      process.env.ADMIN_SECRET_KEY!,
     ) as jwt.JwtPayload;
   } catch (error) {
     const err = new HttpError('could not verify token', 500);

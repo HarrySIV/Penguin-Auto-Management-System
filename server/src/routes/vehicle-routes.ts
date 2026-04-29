@@ -7,7 +7,4 @@ const router = Router();
 router.post('/create-vehicle', createVehicle);
 router.get('/', getVehicles);
 
-// router.put();
-// router.delete();
-
 module.exports = router;

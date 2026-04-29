@@ -6,6 +6,7 @@ import mongoose from 'mongoose';
 import { HttpError } from './utility/http-error';
 
 const accountRoutes = require('./routes/account-routes');
+const adminRoutes = require('./routes/account-routes');
 const vehicleRoutes = require('./routes/vehicle-routes');
 const invoiceRoutes = require('./routes/invoice-routes');
 
@@ -26,6 +27,7 @@ server.use((req, res, next) => {
 });
 
 server.use('/api/account', accountRoutes);
+server.use('/api/admin', adminRoutes);
 server.use('/api/vehicles', vehicleRoutes);
 server.use('/api/invoice', invoiceRoutes);
 
