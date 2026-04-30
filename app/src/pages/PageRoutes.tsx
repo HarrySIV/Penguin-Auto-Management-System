@@ -10,6 +10,7 @@ import { Invoices } from './repair/Invoices';
 import { CreateInvoice } from './CreateInvoice';
 import { AdminLogin } from './user/AdminLogin';
 import { ScheduleAppointment } from './repair/ScheduleAppointment';
+import { AllAppointments } from './repair/AllAppointments';
 
 export const PageRoutes = () => {
   const routes = (
@@ -17,6 +18,7 @@ export const PageRoutes = () => {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/invoices" element={<Invoices />} />
+      <Route path="/all-appointments" element={<AllAppointments />} />
       <Route path="/login" element={<Login />} />
       <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/create-account" element={<CreateAccount />} />

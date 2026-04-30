@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AccountContext } from '../../context/account-context';
 import { Button } from '../../components/ui/Button';
-import { serverURL } from '../../utility/environment';
+import { serverURL, testServerURL } from '../../utility/environment';
 import { useHttpClient } from '../../hooks/http-hook';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ export const ScheduleAppointment = () => {
     });
     try {
       const response = await sendRequest(
-        `${serverURL}/appointment/create`,
+        `${testServerURL}/appointments/create`,
         'POST',
         JSON.stringify(appointmentData),
       );

@@ -8,8 +8,8 @@ import {
 
 const router = Router();
 
-router.post('/create-invoice', createAppointment);
-router.get('/', getAppointments);
+router.post('/create', createAppointment);
+router.post('/', getAppointments);
 router.get('/all', getAllAppointments);
 
 module.exports = router;

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AccountContext } from '../../context/account-context';
-import { storeToken } from '../../utility/account-token';
+import { clearToken } from '../../utility/account-token';
 
 import { Modal } from '../../components/ui/Modal';
 import { Button } from '../../components/ui/Button';
@@ -20,7 +20,7 @@ export const Dashboard = () => {
   };
   const confirmLogout = () => {
     accountInfo?.setAccountInfo(null);
-    storeToken('');
+    clearToken();
     navigate('/login');
   };
 
@@ -51,9 +51,9 @@ export const Dashboard = () => {
       {accountInfo?.accountInfo?.isAdmin ? (
         <div className="flex flex-wrap justify-start">
           <DashboardCard title="Profile" path="/profile" />
-          <DashboardCard title="Appointments" path="/appointments" />
-          <DashboardCard title="Invoices" path="/invoices" />
-          <DashboardCard title="Create Invoice" path="/invoices" />
+          <DashboardCard title="Appointments" path="/all-appointments" />
+          <DashboardCard title="Invoices" path="/all-invoices" />
+          <DashboardCard title="Create Invoice" path="/create-invoice" />
         </div>
       ) : (
         <div className="flex flex-wrap justify-start">

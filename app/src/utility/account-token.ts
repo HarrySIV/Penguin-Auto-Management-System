@@ -5,3 +5,7 @@ export function retrieveToken() {
 export function storeToken(token: string) {
   localStorage.setItem('pams-token', token);
 }
+
+export function clearToken() {
+  localStorage.setItem('pams-token', '');
+}

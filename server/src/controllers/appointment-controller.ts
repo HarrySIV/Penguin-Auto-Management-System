@@ -9,9 +9,14 @@ export const createAppointment: RequestHandler = async (req, res, next) => {
     const err = new HttpError('there was no req.body', 500);
     return next(err);
   }
-  const {} = req.body;
+  const { date, time, period, email } = req.body;
 
-  const createdAppointment = new Appointment({});
+  const createdAppointment = new Appointment({
+    date,
+    time,
+    period,
+    email,
+  });
   try {
     const currentSession = await mongoose.startSession();
     await createdAppointment.save();
