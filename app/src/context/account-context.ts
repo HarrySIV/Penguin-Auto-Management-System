@@ -11,9 +11,12 @@ export type TAccountInfo = {
     year: string;
   }[];
   invoices: {
-    repair: string;
+    repairs: {
+      repair: string;
+      amount: number;
+    }[];
     id: number;
-    amount: number;
+    total: number;
     date: Date;
     vehicle: {
       make: string;

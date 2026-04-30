@@ -48,15 +48,28 @@ export const Dashboard = () => {
       ) : null}
       <h1 className="bg-slate-400">Dashboard</h1>
       <br />
-      <div className="flex flex-wrap justify-start">
-        <DashboardCard title="Profile" path="/profile" />
-        <DashboardCard title="Invoices" path="/invoices" />
-        <Button
-          text="Logout"
-          onClick={handleLogout}
-          className="bg-red-600 h-12 rounded-2xl text-slate-200"
-        />
-      </div>
+      {accountInfo?.accountInfo?.isAdmin ? (
+        <div className="flex flex-wrap justify-start">
+          <DashboardCard title="Profile" path="/profile" />
+          <DashboardCard title="Appointments" path="/appointments" />
+          <DashboardCard title="Invoices" path="/invoices" />
+          <DashboardCard title="Create Invoice" path="/invoices" />
+        </div>
+      ) : (
+        <div className="flex flex-wrap justify-start">
+          <DashboardCard title="Profile" path="/profile" />
+          <DashboardCard
+            title="Schedule an Appointment"
+            path="/schedule-appointment"
+          />
+          <DashboardCard title="Invoices" path="/invoices" />
+        </div>
+      )}
+      <Button
+        text="Logout"
+        onClick={handleLogout}
+        className="bg-red-600 h-12 rounded-2xl text-slate-200"
+      />
     </>
   );
 };

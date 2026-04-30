@@ -9,6 +9,7 @@ const accountRoutes = require('./routes/account-routes');
 const adminRoutes = require('./routes/account-routes');
 const vehicleRoutes = require('./routes/vehicle-routes');
 const invoiceRoutes = require('./routes/invoice-routes');
+const appointmentRoutes = require('./routes/appointment-routes');
 
 const server = express();
 
@@ -30,6 +31,7 @@ server.use('/api/account', accountRoutes);
 server.use('/api/admin', adminRoutes);
 server.use('/api/vehicles', vehicleRoutes);
 server.use('/api/invoices', invoiceRoutes);
+server.use('/api/appointments', appointmentRoutes);
 
 server.use((req, res, next) => {
   const error = new HttpError('Could not find this route.', 404);

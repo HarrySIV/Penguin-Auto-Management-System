@@ -8,10 +8,10 @@ type TDashboardCardProps = {
 
 export const DashboardCard = (props: TDashboardCardProps) => {
   return (
-    <LinkItem to={props.path}>
+    <LinkItem to={props.path} className="fit">
       <Card
         title={props.title}
-        className={`m-10 bg-slate-400 min-w-24 min-h-32 max-w-56 max-h-48`}
+        className={`m-10 bg-slate-400 min-w-24 min-h-16 max-w-56 max-h-48 rounded 2xl p-4`}
       />
     </LinkItem>
   );

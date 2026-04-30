@@ -33,7 +33,7 @@ export function CreateVehicle(props: TCreateVehicleProps) {
       accountInfo?.setAccountInfo({
         ...accountInfo.accountInfo,
         vehicles: [
-          ...accountInfo.accountInfo?.vehicles,
+          ...accountInfo!.accountInfo!.vehicles,
           {
             make: formData.make,
             model: formData.model,

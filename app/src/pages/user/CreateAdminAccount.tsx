@@ -45,7 +45,7 @@ export function CreateAccount() {
   };
 
   return (
-    <div className="m-10 p-10 bg-slate-400 w-fit h-fit">
+    <div className="m-10 p-10 bg-slate-400 w-fit h-fit rounded-2xl">
       <h2 className="">Create Account</h2>
       <form className="">
         <input

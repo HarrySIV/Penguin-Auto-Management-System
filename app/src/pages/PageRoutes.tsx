@@ -8,6 +8,8 @@ import { Error } from './Error';
 import { Profile } from './user/Profile';
 import { Invoices } from './repair/Invoices';
 import { CreateInvoice } from './CreateInvoice';
+import { AdminLogin } from './user/AdminLogin';
+import { ScheduleAppointment } from './repair/ScheduleAppointment';
 
 export const PageRoutes = () => {
   const routes = (
@@ -16,9 +18,10 @@ export const PageRoutes = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/invoices" element={<Invoices />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/admin-login" element={<Login />} />
+      <Route path="/admin-login" element={<AdminLogin />} />
       <Route path="/create-account" element={<CreateAccount />} />
       <Route path="/create-admin-account" element={<CreateAccount />} />
+      <Route path="/schedule-appointment" element={<ScheduleAppointment />} />
       <Route path="/create-invoice" element={<CreateInvoice />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/contact" element={<Contact />} />

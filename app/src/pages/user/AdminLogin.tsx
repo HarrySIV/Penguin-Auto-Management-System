@@ -7,7 +7,7 @@ import { useHttpClient } from '../../hooks/http-hook';
 import { Button } from '../../components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 
-export function Login() {
+export function AdminLogin() {
   const { sendRequest } = useHttpClient();
   const navigate = useNavigate();
   const accountInfo = useContext(AccountContext);
@@ -23,6 +23,7 @@ export function Login() {
       const data = response.account;
       storeToken(response.token);
       accountInfo?.setAccountInfo({
+        isAdmin: true,
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,
@@ -72,7 +73,7 @@ export function Login() {
             onClick={handleLogin}
           />
           <br />
-          <a href="/create-account" className="text-blue-800">
+          <a href="/create-admin-account" className="text-blue-800">
             Create an Account
           </a>
         </form>
